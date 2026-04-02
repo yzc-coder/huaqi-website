@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shandong Huaqi International Trade Co., Ltd. - Professional Trailer & Truck Exporter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        :root {
+            --primary-blue: #0a2463;
+            --primary-red: #d83131;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --white: #fff;
+        }
+        body {
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        /* Header */
+        header {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--primary-red);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--primary-red);
+        }
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 36, 99, 0.85), rgba(10, 36, 99, 0.85)), url('https://images.unsplash.com/photo-1598257006411-554562321742?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 6rem 5%;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero h1 span {
+            color: var(--primary-red);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin: 0 0.5rem;
+        }
+        .btn:hover {
+            background: #b82727;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+        }
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+        /* Section Common */
+        .section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-red);
+        }
+        /* Product Categories */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .category-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        .category-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .category-content {
+            padding: 1.5rem;
+        }
+        .category-content h3 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        /* Product Gallery */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .product-item {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .product-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-item h4 {
+            padding: 1rem;
+            color: var(--primary-blue);
+            text-align: center;
+        }
+        /* About Section */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .about-content h3 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        /* License Section */
+        .license-section {
+            background: var(--light-gray);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        .license-img {
+            max-width: 800px;
+            width: 90%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            display: block;
+        }
+        /* Contact Section */
+        .contact-container {
+            background: var(--light-gray);
+            padding: 3rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .contact-item {
+            text-align: center;
+        }
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+        .contact-item a {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .contact-item a:hover {
+            color: var(--primary-red);
+        }
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+        }
+        .whatsapp-float:hover {
+            text-decoration: none;
+            color: #FFF;
+            background-color: #1ebe57;
+        }
+        /* Product Tabs */
+        .product-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/8613838766668" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#home" class="logo">HUAQI <span>INTERNATIONAL</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Shandong Huaqi <span>International Trade</span></h1>
+        <p>Professional Exporter of Semi-Trailers, Trucks, Special Vehicles & Engineering Machinery for Global Customers</p>
+        <a href="#products" class="btn">View Our Products</a>
+        <a href="https://wa.me/8613838766668" class="btn btn-outline" target="_blank">Contact Us Now</a>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <h2 class="section-title">Our Product Categories</h2>
+        
+        <div class="product-tabs">
+            <button class="tab-btn active" data-tab="semi-trailer">Semi-Trailer</button>
+            <button class="tab-btn" data-tab="truck">Truck & Tractor</button>
+            <button class="tab-btn" data-tab="special">Special Vehicles</button>
+            <button class="tab-btn" data-tab="machinery">Machinery</button>
+            <button class="tab-btn" data-tab="parts">Accessories</button>
+        </div>
+
+        <!-- Semi-Trailer Tab -->
+        <div class="tab-content active" id="semi-trailer">
+            <div class="product-gallery">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Self-dumping Semi-trailer">
+                    <h4>Self-dumping Semi-trailer Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fenced Type Semi-trailer">
+                    <h4>Fenced Type Semi-trailer Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Low Flatbed Semi-trailer">
+                    <h4>Engineering Transport Semi-trailer</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tank Semi-trailer">
+                    <h4>Tank Semi-trailer Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Container Semi-trailer">
+                    <h4>Container Semi-trailer Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vehicle Transport Semi-trailer">
+                    <h4>Vehicle Transport Semi-trailer</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Truck & Tractor Tab -->
+        <div class="tab-content" id="truck">
+            <div class="product-gallery">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tractor Series">
+                    <h4>Tractor Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dump Truck">
+                    <h4>Dump Truck Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cement Mixer Truck">
+                    <h4>Cement Mixer Truck</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Car Carrier Truck">
+                    <h4>Car Carrier Truck</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dangerous Goods Truck">
+                    <h4>Dangerous Goods Transport Truck</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fence Cargo Truck">
+                    <h4>Fence Cargo Truck</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Vehicles Tab -->
+        <div class="tab-content" id="special">
+            <div class="product-gallery">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fire Truck">
+                    <h4>Fire Truck Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wrecker Truck">
+                    <h4>Vehicle Rescue Wrecker</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sanitation Truck">
+                    <h4>Sanitation & Sweeper Truck</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aerial Work Truck">
+                    <h4>Aerial Work Truck</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Crawler Dump Truck">
+                    <h4>Crawler Dump Truck</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Concrete Pump Truck">
+                    <h4>Concrete Pump Truck</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Machinery Tab -->
+        <div class="tab-content" id="machinery">
+            <div class="product-gallery">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Excavator">
+                    <h4>Excavator Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Backhoe Loader">
+                    <h4>Backhoe Loader</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Crane Truck">
+                    <h4>Crane Truck</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1593646985546-696d438a319a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tractor">
+                    <h4>Agricultural Tractor</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1593646985546-696d438a319a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Harvester">
+                    <h4>Corn/Wheat Harvester</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1593646985546-696d438a319a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ploughing Machine">
+                    <h4>Ploughing & Seeding Machine</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accessories Tab -->
+        <div class="tab-content" id="parts">
+            <div class="product-gallery">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599658886626-2402d1df049a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Axle">
+                    <h4>Trailer Axle Series</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599658886626-2402d1df049a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suspension">
+                    <h4>Suspension System</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599658886626-2402d1df049a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hydraulic Cylinder">
+                    <h4>Hydraulic Cylinder</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599658886626-2402d1df049a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tire">
+                    <h4>Tire & Rim</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599658886626-2402d1df049a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Engine">
+                    <h4>Engine & Gearbox</h4>
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599658886626-2402d1df049a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brake System">
+                    <h4>Brake System Parts</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="section" id="about" style="background: var(--light-gray);">
+        <h2 class="section-title">About Shandong Huaqi</h2>
+        <div class="about-container">
+            <img src="https://images.unsplash.com/photo-1598257006626-48b0c252070d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Shandong Huaqi Factory" class="about-img">
+            <div class="about-content">
+                <h3>Your Trusted Global Vehicle Supplier</h3>
+                <p>Shandong Huaqi International Trade Co., Ltd. is located in Liangshan County, Shandong Province, China, the largest trailer production base in China. With nearly 20 years of industry experience, we are a professional enterprise integrating R&D, production and sales.</p>
+                <p>We have passed ISO9001-2000 certification and 3C certification, and are a national "Announcement" management enterprise. We provide one-stop solutions for global customers, from semi-trailers, trucks to special vehicles and engineering machinery.</p>
+                <p>Our products are exported to more than 50 countries around the world, with complete after-sales service system, to ensure your worry-free use.</p>
+                <a href="#contact" class="btn">Get a Free Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business License Section -->
+    <section class="section license-section">
+        <h2 class="section-title">Business License</h2>
+        <img src="https://picsum.photos/id/1/1200/800" alt="Shandong Huaqi International Trade Co., Ltd. Business License" class="license-img">
+        <p style="margin-top: 1rem; font-size: 1.1rem;">Verified Legal Entity | Registered in Liangshan County, Shandong Province</p>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <h3 style="color: var(--primary-blue); font-size: 2rem; margin-bottom: 1rem;">Let's Talk About Your Project</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Contact us anytime, we will reply you within 24 hours</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <a href="https://wa.me/8613838766668" target="_blank">+86 13838766668</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h4>Phone</h4>
+                    <a href="tel:+8613838766668">+86 13838766668</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <a href="mailto:sales@huaqitruck.com">sales@huaqitruck.com</a>
+                </div>
+            </div>
+            <a href="https://wa.me/8613838766668" class="btn" target="_blank">Chat on WhatsApp Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+            <p>&copy; 2025 Shandong Huaqi International Trade Co., Ltd. All Rights Reserved.</p>
+            <p style="margin-top: 1rem;">Professional Trailer & Truck Exporter from China</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navUl = document.querySelector('nav ul');
+        mobileMenu.addEventListener('click', () => {
+            navUl.style.display = navUl.style.display === 'flex' ? 'none' : 'flex';
+            navUl.style.flexDirection = 'column';
+            navUl.style.position = 'absolute';
+            navUl.style.top = '100%';
+            navUl.style.left = 0;
+            navUl.style.width = '100%';
+            navUl.style.background = 'var(--primary-blue)';
+            navUl.style.padding = '1rem 5%';
+        });
+
+        // Product Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
