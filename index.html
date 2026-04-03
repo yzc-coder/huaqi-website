@@ -341,6 +341,107 @@
         .tab-content.active {
             display: block;
         }
+        /* Self-dumping lightbox */
+        .gallery-popup {
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-popup .badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(218, 37, 37, 0.9);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 500;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .lightbox-modal.active {
+            display: flex;
+        }
+        .lightbox-inner {
+            width: min(100%, 1100px);
+            background: #121212;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+        }
+        .lightbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: #111;
+            color: #fff;
+            font-size: 1rem;
+        }
+        .lightbox-close {
+            cursor: pointer;
+            font-size: 1.6rem;
+            padding: 0.15rem 0.5rem;
+        }
+        .lightbox-preview {
+            display: none; /* 隐藏底部缩略图 */
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 0.5rem;
+            background: #090909;
+            padding: 0.5rem;
+        }
+        .lightbox-preview img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .lightbox-preview img.active {
+            border-color: #ffd700;
+        }
+        .lightbox-main img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            background: #000;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        .lightbox-nav button {
+            pointer-events: auto;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-nav button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -391,16 +492,16 @@
         <!-- Semi-Trailer Tab -->
         <div class="tab-content active" id="semi-trailer">
             <div class="product-gallery">
-                <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Self-dumping Semi-trailer">
+                <div class="product-item gallery-popup" id="selfDumpGallery">
+                    <img src="微信图片_20260403163432_53_763.jpg" alt="Self-dumping Semi-trailer">
                     <h4>Self-dumping Semi-trailer Series</h4>
                 </div>
-                <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fenced Type Semi-trailer">
+                <div class="product-item gallery-popup" id="fencedGallery">
+                    <img src="微信图片_20260403163436_56_763.jpg" alt="Fenced Type Semi-trailer">
                     <h4>Fenced Type Semi-trailer Series</h4>
                 </div>
-                <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Low Flatbed Semi-trailer">
+                <div class="product-item gallery-popup" id="engineeringGallery">
+                    <img src="微信图片_20260403163440_61_763.jpg" alt="Engineering Transport Semi-trailer">
                     <h4>Engineering Transport Semi-trailer</h4>
                 </div>
                 <div class="product-item">
@@ -414,6 +515,72 @@
                 <div class="product-item">
                     <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vehicle Transport Semi-trailer">
                     <h4>Vehicle Transport Semi-trailer</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="lightbox-modal" id="selfDumpLightbox">
+            <div class="lightbox-inner">
+                <div class="lightbox-header">
+                    <span>Self-dumping Semi-trailer Gallery</span>
+                    <span class="lightbox-close" id="lightboxClose">×</span>
+                </div>
+                <div class="lightbox-main" id="lightboxMain">
+                    <img src="微信图片_20260403163432_53_763.jpg" alt="自卸半挂 1">
+                    <div class="lightbox-nav">
+                        <button id="selfDumpPrev" class="lightbox-prev" aria-label="上一张" title="上一张">❮</button>
+                        <button id="selfDumpNext" class="lightbox-next" aria-label="下一张" title="下一张">❯</button>
+                    </div>
+                </div>
+                <div class="lightbox-preview" id="lightboxPreview">
+                    <img src="微信图片_20260403163432_53_763.jpg" alt="自卸半挂 1" data-index="0" class="active">
+                    <img src="微信图片_20260403163433_54_763.jpg" alt="自卸半挂 2" data-index="1">
+                    <img src="微信图片_20260403163434_55_763.jpg" alt="自卸半挂 3" data-index="2">
+                </div>
+            </div>
+        </div>
+
+        <div class="lightbox-modal" id="fencedLightbox">
+            <div class="lightbox-inner">
+                <div class="lightbox-header">
+                    <span>Fenced Type Semi-trailer Gallery</span>
+                    <span class="lightbox-close" id="fencedLightboxClose">×</span>
+                </div>
+                <div class="lightbox-main" id="fencedLightboxMain">
+                    <img src="微信图片_20260403163436_56_763.jpg" alt="围栏式半挂 1">
+                    <div class="lightbox-nav">
+                        <button id="fencedPrev" class="lightbox-prev" aria-label="上一张" title="上一张">❮</button>
+                        <button id="fencedNext" class="lightbox-next" aria-label="下一张" title="下一张">❯</button>
+                    </div>
+                </div>
+                <div class="lightbox-preview" id="fencedLightboxPreview">
+                    <img src="微信图片_20260403163436_56_763.jpg" alt="围栏式半挂 1" data-index="0" class="active">
+                    <img src="微信图片_20260403163437_57_763.jpg" alt="围栏式半挂 2" data-index="1">
+                    <img src="微信图片_20260403163438_59_763.jpg" alt="围栏式半挂 3" data-index="2">
+                </div>
+            </div>
+        </div>
+
+        <div class="lightbox-modal" id="engineeringLightbox">
+            <div class="lightbox-inner">
+                <div class="lightbox-header">
+                    <span>Engineering Transport Semi-trailer Gallery</span>
+                    <span class="lightbox-close" id="engineeringLightboxClose">×</span>
+                </div>
+                <div class="lightbox-main" id="engineeringLightboxMain">
+                    <img src="微信图片_20260403163440_61_763.jpg" alt="工程运输半挂 1">
+                    <div class="lightbox-nav">
+                        <button id="engineeringPrev" class="lightbox-prev" aria-label="上一张" title="上一张">❮</button>
+                        <button id="engineeringNext" class="lightbox-next" aria-label="下一张" title="下一张">❯</button>
+                    </div>
+                </div>
+                <div class="lightbox-preview" id="engineeringLightboxPreview">
+                    <img src="微信图片_20260403163440_61_763.jpg" alt="工程运输半挂 1" data-index="0" class="active">
+                    <img src="微信图片_20260403163441_62_763.jpg" alt="工程运输半挂 2" data-index="1">
+                    <img src="微信图片_20260403163442_63_763.jpg" alt="工程运输半挂 3" data-index="2">
+                    <img src="微信图片_20260403163443_64_763.jpg" alt="工程运输半挂 4" data-index="3">
+                    <img src="微信图片_20260403163445_65_763.jpg" alt="工程运输半挂 5" data-index="4">
+                    <img src="微信图片_20260403163446_66_763.jpg" alt="工程运输半挂 6" data-index="5">
                 </div>
             </div>
         </div>
@@ -628,6 +795,101 @@
                 btn.classList.add('active');
                 document.getElementById(tab).classList.add('active');
             });
+        });
+
+        function setupGallery(options) {
+            const galleryEl = document.getElementById(options.galleryId);
+            const lightboxEl = document.getElementById(options.lightboxId);
+            const lightboxCloseEl = document.getElementById(options.lightboxCloseId);
+            const lightboxMainImg = document.getElementById(options.lightboxMainId).querySelector('img');
+            const previewEls = Array.from(document.querySelectorAll('#' + options.lightboxPreviewId + ' img'));
+            const prevBtn = lightboxEl.querySelector('.lightbox-prev');
+            const nextBtn = lightboxEl.querySelector('.lightbox-next');
+            let currentIndex = options.coverIndex;
+
+            function selectImage(index) {
+                const safeIndex = ((index % options.urls.length) + options.urls.length) % options.urls.length;
+                currentIndex = safeIndex;
+                lightboxMainImg.src = options.urls[safeIndex];
+                previewEls.forEach(img => img.classList.remove('active'));
+                previewEls[safeIndex].classList.add('active');
+            }
+
+            galleryEl?.addEventListener('click', () => {
+                lightboxEl?.classList.add('active');
+                selectImage(options.coverIndex);
+            });
+
+            prevBtn?.addEventListener('click', e => {
+                e.stopPropagation();
+                selectImage(currentIndex - 1);
+            });
+            nextBtn?.addEventListener('click', e => {
+                e.stopPropagation();
+                selectImage(currentIndex + 1);
+            });
+
+            lightboxCloseEl?.addEventListener('click', () => {
+                lightboxEl?.classList.remove('active');
+            });
+
+            lightboxEl?.addEventListener('click', e => {
+                if (e.target === lightboxEl) {
+                    lightboxEl.classList.remove('active');
+                }
+            });
+
+            previewEls.forEach(img => {
+                img.addEventListener('click', () => {
+                    const index = Number(img.dataset.index);
+                    selectImage(index);
+                });
+            });
+        }
+
+        setupGallery({
+            galleryId: 'selfDumpGallery',
+            lightboxId: 'selfDumpLightbox',
+            lightboxCloseId: 'lightboxClose',
+            lightboxMainId: 'lightboxMain',
+            lightboxPreviewId: 'lightboxPreview',
+            urls: [
+                '微信图片_20260403163432_53_763.jpg',
+                '微信图片_20260403163433_54_763.jpg',
+                '微信图片_20260403163434_55_763.jpg'
+            ],
+            coverIndex: 0
+        });
+
+        setupGallery({
+            galleryId: 'fencedGallery',
+            lightboxId: 'fencedLightbox',
+            lightboxCloseId: 'fencedLightboxClose',
+            lightboxMainId: 'fencedLightboxMain',
+            lightboxPreviewId: 'fencedLightboxPreview',
+            urls: [
+                '微信图片_20260403163436_56_763.jpg',
+                '微信图片_20260403163437_57_763.jpg',
+                '微信图片_20260403163438_59_763.jpg'
+            ],
+            coverIndex: 0
+        });
+
+        setupGallery({
+            galleryId: 'engineeringGallery',
+            lightboxId: 'engineeringLightbox',
+            lightboxCloseId: 'engineeringLightboxClose',
+            lightboxMainId: 'engineeringLightboxMain',
+            lightboxPreviewId: 'engineeringLightboxPreview',
+            urls: [
+                '微信图片_20260403163440_61_763.jpg',
+                '微信图片_20260403163441_62_763.jpg',
+                '微信图片_20260403163442_63_763.jpg',
+                '微信图片_20260403163443_64_763.jpg',
+                '微信图片_20260403163445_65_763.jpg',
+                '微信图片_20260403163446_66_763.jpg'
+            ],
+            coverIndex: 0
         });
     </script>
 </body>
